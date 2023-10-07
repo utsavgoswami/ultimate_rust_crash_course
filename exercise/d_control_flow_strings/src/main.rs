@@ -1,6 +1,9 @@
 // Silence some warnings so they don't distract from the exercise.
 #![allow(dead_code, unused_mut, unused_variables)]
 
+const SUM: &str = "sum";
+const DOUBLE: &str = "double";
+
 fn main() {
     // This collects any command-line arguments into a vector of Strings.
     // For example:
@@ -15,8 +18,15 @@ fn main() {
     // This consumes the `args` vector to iterate through each String
     for arg in args {
         // 1a. Your task: handle the command-line arguments!
-        //
         // - If arg is "sum", then call the sum() function
+        if arg == SUM {
+            sum();
+        } else if arg == DOUBLE {
+            double();
+        } else {
+            count(arg);
+        }
+
         // - If arg is "double", then call the double() function
         // - If arg is anything else, then call the count() function, passing "arg" to it.
 
