@@ -23,7 +23,11 @@ fn main() {
     //
     // If you get stuck, remember that this is *very* similar to what `area_of` does.
     //
-    //println!("Volume is {}", volume(width, height, depth));
+    println!("Volume is {}", volume(width, height, depth));
+}
+
+fn volume(w: i32, h: i32, d: i32) -> i32 {
+    w * h * d
 }
 
 fn area_of(x: i32, y: i32) -> i32 {
