@@ -54,12 +54,16 @@ fn main() {
 
         //   B. Append the correct variant of `Shot` to the `shots` vector depending on the value of
         //   `coord.distance_from_center()`
-        let distance = coord.distance_from_center();
 
         // - Less than 1.0 -- `Shot::Bullseye`
         // - Between 1.0 and 5.0 -- `Shot::Hit(value)`
         // - Greater than 5.0 -- `Shot::Miss`
-        let shot = if distance < 1.0 { Bullseye } else if distance >= 1.0 && distance <= 5.0 { Hit(distance) } else { Miss };
+        let shot = match coord.distance_from_center() {
+            x if x < 1.0 => { Bullseye },
+            x if x >= 1.0 && x <= 5.0 => { Hit(x) },
+            _ => Miss
+        };
+
         shots.push(shot);
     }
 
