@@ -27,12 +27,8 @@ impl Shot {
             Shot::Bullseye => {
                 5
             },
-            Shot::Hit(x) => {
-                // - return 2 points if `self` is a `Shot::Hit(x)` where x < 3.0
-                // - return 1 point if `self` is a `Shot::Hit(x)` where x >= 3.0
-                let res = if x >= 3.0 { 1 } else { 2 };
-                res
-            },
+            Shot::Hit(x) if x >= 3.0 => { 1 },
+            Shot::Hit(x) => { 2 },
             Shot::Miss => {
                 // - return 0 points if `self` is a Miss
                 0
@@ -54,7 +50,6 @@ fn main() {
 
         //   B. Append the correct variant of `Shot` to the `shots` vector depending on the value of
         //   `coord.distance_from_center()`
-
         // - Less than 1.0 -- `Shot::Bullseye`
         // - Between 1.0 and 5.0 -- `Shot::Hit(value)`
         // - Greater than 5.0 -- `Shot::Miss`
