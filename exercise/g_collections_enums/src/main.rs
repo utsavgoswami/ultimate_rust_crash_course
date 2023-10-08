@@ -1,6 +1,8 @@
 // Silence some warnings that could distract from the exercise
 #![allow(unused_variables, unused_mut, dead_code)]
 
+use crate::Shot::{Bullseye, Hit, Miss};
+
 // Someone is shooting arrows at a target.  We need to classify the shots.
 //
 // 1a. Create an enum called `Shot` with variants:
@@ -46,17 +48,26 @@ fn main() {
     let mut shots: Vec<Shot> = Vec::new();
 
     // 2. For each coord in arrow_coords:
-    //
-    //   A. Call `coord.print_description()`
-    //   B. Append the correct variant of `Shot` to the `shots` vector depending on the value of
-    //   `coord.distance_from_center()`
-    //      - Less than 1.0 -- `Shot::Bullseye`
-    //      - Between 1.0 and 5.0 -- `Shot::Hit(value)`
-    //      - Greater than 5.0 -- `Shot::Miss`
+    for coord in arrow_coords {
+        //   A. Call `coord.print_description()`
+        coord.print_description();
 
+        //   B. Append the correct variant of `Shot` to the `shots` vector depending on the value of
+        //   `coord.distance_from_center()`
+        let distance = coord.distance_from_center();
 
-    let mut total = 0;
+        // - Less than 1.0 -- `Shot::Bullseye`
+        // - Between 1.0 and 5.0 -- `Shot::Hit(value)`
+        // - Greater than 5.0 -- `Shot::Miss`
+        let shot = if distance < 1.0 { Bullseye } else if distance >= 1.0 && distance <= 5.0 { Hit(distance) } else { Miss };
+        shots.push(shot);
+    }
+
     // 3. Finally, loop through each shot in shots and add its points to total
+    let mut total = 0;
+    for shot in shots {
+        total += shot.points();
+    }
 
     println!("Final point total is: {}", total);
 }
